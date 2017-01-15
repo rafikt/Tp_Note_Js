@@ -4,9 +4,13 @@ var data = require('../helpers/data');
 var Film = require('../models/Film');
 var Review = require('../models/Review');
 
+router.get('/', ensureAuthenticated, function(req, res){
+	res.render('index');
+});
+
 router.get(['/', '/index'], function(req, res) {
 
-    /*data.loadData('films.json', function(err, films) {
+    data.loadData('films.json', function(err, films) {
       var filmJson = JSON.parse(films);
       filmJson.forEach(function(f) {
         var fi = new Film(f);
@@ -15,8 +19,8 @@ router.get(['/', '/index'], function(req, res) {
           console.log(fsave);
         });
       })
-        //res.render('index.html', { films: JSON.parse(films) });
-    })*/
+        res.render('index.html', { films: JSON.parse(films) });
+    })
 
     /*data.loadData('reviews.json', function(err, reviews) {
       var reviewJson = JSON.parse(reviews);
@@ -76,5 +80,15 @@ router.get('/first-insert', function(req, res) {
       res.end();
    });
 });
+
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		//req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
 
 module.exports = router;
