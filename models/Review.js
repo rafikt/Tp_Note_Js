@@ -6,8 +6,7 @@ var Schema = db.Schema;
 var reviewSchema = new Schema({
   username: 'String',
   message: 'String',
-  note: 'String',
-  Film: { type: Schema.Types.ObjectId, ref: 'Film'}
+  note: 'String'
 });
 
 var Review = db.model('Review', reviewSchema);

@@ -9,7 +9,7 @@ var filmSchema = new Schema({
   releaseDate: 'String',
   addDate: 'String',
   synopsis: 'String',
-  reviews: [{type: Schema.Types.ObjectId, ref:'Reviews'}]
+  reviews: [{type: Schema.Types.ObjectId, ref:'Review'}]
 });
 
 var Film = db.model('Film', filmSchema);
