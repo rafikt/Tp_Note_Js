@@ -3,9 +3,13 @@ var fs = require('fs');
 var data = require('../helpers/data');
 var Film = require('../models/Film');
 
+router.get('/', ensureAuthenticated, function(req, res){
+	res.render('index');
+});
+
 router.get(['/', '/index'], function(req, res) {
 
-    /*data.loadData('films.json', function(err, films) {
+    data.loadData('films.json', function(err, films) {
       var filmJson = JSON.parse(films);
       filmJson.forEach(function(f) {
         var fi = new Film(f);
@@ -14,8 +18,8 @@ router.get(['/', '/index'], function(req, res) {
           console.log(fsave);
         });
       })
-        //res.render('index.html', { films: JSON.parse(films) });
-    })*/
+        res.render('index.html', { films: JSON.parse(films) });
+    })
 
   Film.find({}).exec(function(err, films) {
     console.log(films);
@@ -31,5 +35,15 @@ router.get('/film/:title', function(req, res) {
   });
 
 });
+
+
+function ensureAuthenticated(req, res, next){
+	if(req.isAuthenticated()){
+		return next();
+	} else {
+		//req.flash('error_msg','You are not logged in');
+		res.redirect('/users/login');
+	}
+}
 
 module.exports = router;
