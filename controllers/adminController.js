@@ -1,7 +1,6 @@
 var router = require('express').Router();
 var fs = require('fs');
 var data = require('../helpers/data');
-var filters = require('../helpers/filters');
 var Admin = require('../models/Admin');
 var router = express.Router();
 var passport = require('passport');

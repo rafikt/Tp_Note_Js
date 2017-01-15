@@ -4,13 +4,9 @@ var data = require('../helpers/data');
 var Film = require('../models/Film');
 var Review = require('../models/Review');
 
-router.get('/', ensureAuthenticated, function(req, res){
-	res.render('index');
-});
-
 router.get(['/', '/index'], function(req, res) {
 
-    data.loadData('films.json', function(err, films) {
+    /*data.loadData('films.json', function(err, films) {
       var filmJson = JSON.parse(films);
       filmJson.forEach(function(f) {
         var fi = new Film(f);
@@ -20,7 +16,7 @@ router.get(['/', '/index'], function(req, res) {
         });
       })
         res.render('index.html', { films: JSON.parse(films) });
-    })
+    })*/
 
     /*data.loadData('reviews.json', function(err, reviews) {
       var reviewJson = JSON.parse(reviews);
