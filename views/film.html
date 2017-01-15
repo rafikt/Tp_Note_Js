@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/public/css/bootstrap.min.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="/public/css/main.css" />
     <title>Enicolla</title>
   </head>
@@ -20,6 +21,28 @@
           <p>Résumé : <%= film.synopsis %></p>
         </div>
       </div>
+    </div>
+    <div class="container">
+      <h2>
+        Commentaires
+      </h2>
+      <% film.reviews.forEach(function(review) { %>
+      <div class="thumbnail">
+        <h4>Note de <%= review.username %></h4>
+        <div class="caption">
+          <p>
+            Note :
+            <% for(var i = 0; i < parseInt(review.note); i++) { %>
+              <i class="fa fa-star" aria-hidden="true"></i>
+            <% } %>
+            <% for(var i = 0; i < (10 - parseInt(review.note)); i++) { %>
+              <i class="fa fa-star-o" aria-hidden="true"></i>
+            <% } %>
+          </p>
+          <p><%= review.message %></p>
+        </div>
+      </div>
+      <% }) %>
     </div>
 
   </body>
